@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Verificação de Segurança</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: #f4f6fb;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card {
+  background: #fff;
+  width: 360px;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.produto-img {
+  width: 90px;
+  margin-bottom: 10px;
+}
+
+.produto-nome {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.card h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
+
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CHECKBOX ESTILIZADO */
+.robot-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 2px solid #eee;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+.robot-check:hover {
+  border-color: #ff245c;
+}
+
+.robot-check input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid #bbb;
+  position: relative;
+  transition: 0.3s;
+}
+
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg) scale(0);
+  left: 8px;
+  top: 3px;
+  transition: 0.3s;
+}
+
+.robot-check input:checked + .custom-checkbox {
+  background: linear-gradient(135deg, #ff245c, #ff5a8a);
+  border-color: #ff245c;
+}
+
+.robot-check input:checked + .custom-checkbox::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* BOTÃO */
+.btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff245c, #ff5a8a);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255,36,92,0.45);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+small {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+}
+
+    </style>
+
+<div class="card">
+
+  <!-- PRODUTO -->
+  <img class="produto-img" src="hs2twgf.png" alt="Produto">
+  <!-- <h3 class="produto-nome">Nome do Seu Produto</h3> -->
+
+  <h2>Verificação de Segurança</h2>
+  <p>Confirme para continuar para a oferta.</p>
+
+  <!-- CHECKBOX -->
+  <label class="robot-check">
+    <input type="checkbox" id="robot">
+    <span class="custom-checkbox"></span>
+    <span class="text">Não sou um robô</span>
+  </label>
+
+  <!-- BOTÃO -->
+  <button class="btn" id="btn" disabled onclick="verificar()">Verificar</button>
+
+  <small>Esta verificação ajuda a combater acessos automatizados.</small>
+
+</div>
+
+<script>
+    
+const check = document.getElementById('robot');
+const btn = document.getElementById('btn');
+
+check.addEventListener('change', () => {
+  btn.disabled = !check.checked;
+});
+
+function verificar() {
+  btn.innerText = "Verificando...";
+  btn.disabled = true;
+
+  // Simula verificação de segurança
+  setTimeout(() => {
+      window.location.href = "index.html";
+  }, 1800);
+}
+
+</script>
+</body>
+</html>
