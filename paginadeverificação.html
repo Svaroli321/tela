@@ -619,6 +619,78 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
     </div>
   </section>
 
+	<style>
+.aviso-destaque {
+  margin-top: 16px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, #fff7ed, #ffedd5);
+  border: 1px solid #fed7aa;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.aviso-destaque .texto {
+  font-size: 13.5px;
+  color: #7c2d12;
+  line-height: 1.4;
+}
+
+.aviso-destaque .texto strong {
+  color: #9a3412;
+}
+
+.btn-chamativo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: linear-gradient(135deg, #f97316, #ea580c);
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 6px 16px rgba(234, 88, 12, 0.35);
+  animation: pulse 1.6s infinite;
+  transition: transform 0.2s;
+}
+
+.btn-chamativo:hover {
+  transform: scale(1.05);
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0.5); }
+  70% { box-shadow: 0 0 0 10px rgba(234, 88, 12, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(234, 88, 12, 0); }
+}
+
+.btn-chamativo svg {
+  width: 16px;
+  height: 16px;
+}
+</style>
+
+<div class="aviso-destaque">
+  <div class="texto">
+    <strong>Atenção:</strong> Caso tenha qualquer problema com seu pedido,
+    utilize nosso canal oficial de reclamações.
+  </div>
+
+  <a href="reclamação.html" class="btn-chamativo">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M12 9v2m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    Reclamar
+  </a>
+</div>
+
+
   <!-- BOTÃO FIXO - CORRIGIDO PARA NÃO SAIR DA TELA -->
   <nav class="dock">
     <div class="dock-container">
@@ -680,6 +752,7 @@ var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n
 </body>
 
 </html>
+
 
 
 
