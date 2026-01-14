@@ -1,689 +1,193 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Luminária Solar com Câmera Integrada</title>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
-  <link rel="icon" class="logo_top" href="imagem_shop-removebg-preview.png" type="image/png">
-
-  <style>
-    /* ——————————— MOBILE‑FIRST, SEM FRAMEWORKS ——————————— */
-    :root{
-      --bg:#ffffff;--text:#111827;--muted:#6b7280;--line:#e5e7eb;--card:#ffffff;--shadow:0 6px 20px rgba(17,24,39,.08);
-      --brand:#f5506d;--brand-600:#e11d48;--accent:#111827;--yellow:#f59e0b;--badge:#F87416
-    }
-   
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    html,body{
-      height:100%;
-      overflow-x: hidden;
-    }
-    body{
-      margin:0;
-      background:var(--bg);
-      color:var(--text);
-      font-family: system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica, Arial, sans-serif;
-      font-size: 15px;
-      line-height: 1.45;
-      padding-bottom: 70px;
-    }
-    .container{
-      width:100%;
-      max-width:640px;
-      margin:0 auto;
-      padding:0 12px
-    }
-    .hidden{display:none}
-    .card{
-      background:var(--card);
-      border:1px solid var(--line);
-      border-radius:14px;
-      box-shadow:var(--shadow)
-    }
-    .btn{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      height:44px;
-      border-radius:8px;
-      font-weight:800;
-      border: none;
-      text-decoration: none;
-    }
-    .btn-primary{
-      background-color: #e01c46;
-      color:#fff;
-      font-size: 14px;
-    }
-    .btn-primary:active{
-      transform:translateY(1px);
-      background: var(--brand-600);
-    }
-    .row{
-      display:flex;
-      gap:10px;
-      align-items:center
-    }
-    .space{height:10px}
-    .divider{
-      height:8px;
-      background:#f3f4f6;
-      margin:16px 0
-    }
-
-    /* Header */
-    header{
-      position:sticky;
-      top:0;
-      z-index:50;
-      background:#fff;
-      border-bottom:1px solid var(--line)
-    }
-    header .bar{
-      height:52px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between
-    }
-    header .icon{
-      width:40px;
-      height:40px;
-      border-radius:999px;
-      background:#f3f4f6;
-      display:grid;
-      place-items:center
-    }
-
-    /* Galeria */
-    .hero{
-      position:relative;
-      border-radius:16px;
-      overflow:hidden;
-      background:#f8fafc;
-      height:56vh;
-      min-height:300px
-    }
-    .hero img{
-      width:100%;
-      height:100%;
-      object-fit:contain
-    }
-    .dots{
-      position:absolute;
-      left:50%;
-      bottom:10px;
-      transform:translateX(-50%);
-      display:flex;
-      gap:6px
-    }
-    .dot{
-      width:6px;
-      height:6px;
-      border-radius:999px;
-      background:#e5e7eb
-    }
-    .dot.active{background:#111827}
-
-    /* Preço / Oferta */
-    .badge{
-      background:var(--badge);
-      color:#fff;
-      border-radius:12px 12px 0 0;
-      padding:14px
-    }
-    .badge h3{
-      margin:0;
-      font-size:24px
-    }
-    .badge small{opacity:.95}
-    .price-card{padding:14px}
-    .rating i{color:var(--yellow)}
-    .chips{
-      display:flex;
-      flex-wrap:wrap;
-      gap:8px
-    }
-    .chip{
-      border:1px solid var(--line);
-      border-radius:10px;
-      padding:7px 10px;
-      color:#374151;
-      font-weight:600;
-      font-size:13px
-    }
-
-    /* Selo linha scroll - AGORA UM ABAIXO DO OUTRO */
-    .trust-items{
-      display:flex;
-      flex-direction:column;
-      gap:10px
-    }
-    .trust-item{
-      display:flex;
-      gap:10px;
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:12px;
-      background:#fff
-    }
-    .trust-item i{font-size:18px}
-
-    /* Reviews */
-    .review{padding:14px}
-    .review header{position:static;border:0}
-    .avatar{
-      width:42px;
-      height:42px;
-      border-radius:999px;
-      object-fit:cover
-    }
-    .review-images{
-      display:flex;
-      gap:8px;
-      margin-top:12px;
-      overflow-x:auto;
-      padding-bottom:8px
-    }
-    .review-image{
-      width:80px;
-      height:80px;
-      border-radius:8px;
-      object-fit:cover;
-      flex-shrink:0
-    }
-
-    /* Descrição / Prosa */
-    .prose h2{margin:0 0 8px 0}
-    .prose h3{margin:14px 0 6px 0;font-size:16px}
-    .prose p{margin:0 0 8px 0;color:#374151}
-
-    /* FAQ */
-    details{
-      border:1px solid var(--line);
-      border-radius:12px
-    }
-    summary{
-      padding:14px;
-      cursor:pointer;
-      font-weight:700
-    }
-    details>div{
-      padding:0 14px 14px 14px;
-      color:#374151
-    }
-
-    /* BOTÃO FIXO - CORRIGIDO PARA NÃO SAIR DA TELA */
-    .dock{
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1000;
-      background: white;
-      border-top: 1px solid #e5e7eb;
-      padding: 8px 12px;
-      box-shadow: 0 -2px 10px rgba(0,0,0,0.1);
-    }
-    .dock-container{
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      max-width: 640px;
-      margin: 0 auto;
-      gap: 8px;
-    }
-    .dock-options{
-      display: flex;
-      flex: 1;
-      gap: 0;
-      min-width: 0;
-    }
-    .dock-option{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 4px 6px;
-      color: #6b7280;
-      font-size: 10px;
-      font-weight: 600;
-      text-decoration: none;
-      flex: 1;
-      min-width: 0;
-    }
-    .dock-option i{
-      font-size: 16px;
-      margin-bottom: 2px;
-    }
-    .dock-option.active{
-      color: var(--brand);
-    }
-    .dock-option span{
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 100%;
-      text-align: center;
-    }
-    .dock .btn{
-      height: 40px;
-      min-width: 110px;
-      font-size: 13px;
-      flex-shrink: 0;
-      padding: 0 12px;
-    }
-
-    /* Botão seguir */
-    .follow-btn{
-      background:#f5506d;
-      color:white;
-      border:none;
-      border-radius:8px;
-      padding:6px 12px;
-      font-size:12px;
-      font-weight:600;
-      cursor:pointer
-    }
-
-    /* Desktop (aperfeiçoa grid) */
-    @media (min-width:768px){
-      .grid-2{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        gap:14px
-      }
-      .hero{height:48vh}
-    }
-
-    /* Mobile específico */
-    @media (max-width: 480px) {
-      .container {
-        padding: 0 10px;
-      }
-      .dock {
-        padding: 6px 10px;
-      }
-      .dock-option {
-        padding: 4px 4px;
-        font-size: 9px;
-      }
-      .dock-option i {
-        font-size: 14px;
-      }
-      .dock .btn {
-        min-width: 100px;
-        font-size: 12px;
-        height: 38px;
-      }
-    }
-
-    /* Ajustes para telas muito pequenas */
-    @media (max-width: 360px) {
-      .dock-option span {
-        font-size: 8px;
-      }
-      .dock .btn {
-        min-width: 90px;
-        font-size: 11px;
-        height: 36px;
-      }
-      .dock-container {
-        gap: 6px;
-      }
-    }
-  </style>
-
-  <!-- TikTok Pixel Code Start -->
-<!-- TikTok Pixel Code Start -->
-<!-- TikTok Pixel Code Start -->
-<script>
-!function (w, d, t) {
-  w.TiktokAnalyticsObject=t;var ttq=w[t]=w[t]||[];ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"],ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++)ttq.setAndDefer(ttq,ttq.methods[i]);ttq.instance=function(t){for(
-var e=ttq._i[t]||[],n=0;n<ttq.methods.length;n++)ttq.setAndDefer(e,ttq.methods[n]);return e},ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js",o=n&&n.partner;ttq._i=ttq._i||{},ttq._i[e]=[],ttq._i[e]._u=r,ttq._t=ttq._t||{},ttq._t[e]=+new Date,ttq._o=ttq._o||{},ttq._o[e]=n||{};n=document.createElement("script")
-;n.type="text/javascript",n.async=!0,n.src=r+"?sdkid="+e+"&lib="+t;e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(n,e)};
-
-
-  ttq.load('D5JFTR3C77U2941FS3A0');
-  ttq.page();
-}(window, document, 'ttq');
-</script>
-<!-- TikTok Pixel Code End -->
-<!-- TikTok Pixel Code End -->
+  <meta charset="UTF-8">
+  <title>Verificação de Segurança</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="container bar">
-      <div class="row">
-        <span class="icon" aria-label="Voltar"><i class="fa-solid fa-chevron-left"></i></span>
-        <small style="color:var(--muted)">Loja › Áudio › Luminária</small>
-      </div>
-      <div class="row">
-        <span class="icon"><i class="fa-solid fa-share-nodes"></i></span>
-        <span class="icon"><i class="fa-solid fa-cart-shopping"></i></span>
-        <span class="icon"><i class="fa-solid fa-ellipsis"></i></span>
-      </div>
-    </div>
-  </header>
+    <style>
+        * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
 
-  <!-- HERO + PREÇO (MOBILE-FIRST empilhado) -->
-  <section class="container" style="padding:12px 12px 0 12px">
-    <div class="grid-2">
-      <!-- Galeria com slider -->
-      <div class="card hero" id="galeria">
-        <img id="hero" src="Captura de tela 2026-01-14 000744.png" alt="JBL PartyBox"/>
-        <div class="dots">
-          <span class="dot active" data-index="0"></span>
-          <span class="dot" data-index="1"></span>
-          <span class="dot" data-index="2"></span>
-          <span class="dot" data-index="3"></span>
-          <span class="dot" data-index="4"></span>
-        </div>
-      </div>
+body {
+  background: #f4f6fb;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-      <!-- Preço -->
-      <aside class="card" style="overflow:hidden">
-        <div class="badge">
-          <h3>R$ 129,97 <i class="fa-solid fa-gift"></i></h3>
-          <small>De <s>R$ 289,90</s> • Economize 55% - OFF</small>
-          <div class="row" style="margin-top:8px">
-            <small style="background:rgba(255,255,255,.2);padding:4px 8px;border-radius:8px">TERMINA EM <b id="timer">50:55</b></small>
-            <i class="fa-solid fa-circle" style="font-size:8px;opacity:.85"></i>
-          </div>
-        </div>
-        <div class="price-card">
-         
-          <!-- CORREÇÃO: "Primo" para "Promo" -->
-          <h1 style="margin:0 0 6px 0;font:800 17px/1.2 system-ui">Promoção do Mês</h1>
-          <h2 style="margin:0 0 4px 0;font:700 16px/1.2 system-ui">Luminária Solar com Câmera Integrada</h2>
-          <h3 style="margin:0 0 4px 0;font:600 15px/1.2 system-ui;color:#6b7280">Segurança para sua </h3>
-          <h3 style="margin:0 0 12px 0;font:600 15px/1.2 system-ui;color:#6b7280">Familía</h3>
-          
-          <div class="row" style="color:#4b5563;font-weight:700">
-            <span class="rating">
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-solid fa-star"></i>
-              <i class="fa-regular fa-star"></i>
-            </span>
-            <small><strong>4.7</strong> (207) • +14 mil vendidos</small>
-          </div>
-          
-          <div class="space"></div>
-          
-          <div>
-            <h4 style="margin:0 0 6px 0;font:700 15px system-ui">Monocristalino</h4>
-            <p style="margin:0 0 12px 0">5v/10v</p>
-          </div>
-          
-          <div class="chips">
-            <!-- <span class="chip"><i class="fa-solid fa-bolt"></i> 110v/220v</span> -->
-            <span class="chip"><i class="fa-solid fa-truck-fast"></i> Frete grátis</span>
-            <span class="chip"><i class="fa-solid fa-rotate-left"></i> Devolução até  15 dias</span>
-          </div>
-          <div class="space"></div>
-          <a class="btn btn-primary" href="https://pay.shopeletros.info/pay/aaa39068-4e74-438b-9397-cb9ba0235b7b">COMPRAR AGORA</a>
-        </div>
-      </aside>
-    </div>
-  </section>
+.card {
+  background: #fff;
+  width: 360px;
+  padding: 30px;
+  border-radius: 18px;
+  text-align: center;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
 
-  <div class="divider"></div>
+.produto-img {
+  width: 90px;
+  margin-bottom: 10px;
+}
 
-  <!-- SELINHOS UM ABAIXO DO OUTRO -->
-  <section class="container">
-    <div class="trust-items">
-      <div class="trust-item">
-        <i class="fa-solid fa-truck-fast" style="color:#16a34a"></i>
-        <div>
-          <b>Frete grátis</b><br>
-          <small class="muted">Entrega expressa em todo Brasil. Receba seu produto em até 15 dias úteis com código de rastreamento completo.</small>
-        </div>
-      </div>
-      <div class="trust-item">
-        <i class="fa-solid fa-rotate-left" style="color:#f59e0b"></i>
-        <div>
-          <b>Devolução grátis até 15 dias</b><br>
-          <small class="muted">Não gostou? Devolvemos seu dinheiro sem burocracia. Frete de retorno gratuito e reembolso rápido garantido.</small>
-        </div>
-      </div>
-    </div>
-  </section>
+.produto-nome {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
 
-  <div class="divider"></div>
+.card h2 {
+  font-size: 22px;
+  margin-bottom: 8px;
+}
 
-  <!-- AVALIAÇÕES (compacto) - TODAS AS AVALIAÇÕES ADICIONADAS -->
-  <section class="container" id="reviews">
-    <div class="row" style="justify-content:space-between;margin-bottom:6px">
-      <h2 style="margin:0;font:800 18px system-ui">Avaliações dos clientes <span style="color:#6b7280;font-weight:600">(491)</span></h2>
-      <a href="#" style="font-weight:800;color:#2563eb;text-decoration:none">Ver todas</a>
-    </div>
+.card p {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* CHECKBOX ESTILIZADO */
+.robot-check {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  border: 2px solid #eee;
+  cursor: pointer;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+.robot-check:hover {
+  border-color: #ff245c;
+}
+
+.robot-check input {
+  display: none;
+}
+
+.custom-checkbox {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  border: 2px solid #bbb;
+  position: relative;
+  transition: 0.3s;
+}
+
+.custom-checkbox::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 16px;
+  border-right: 3px solid white;
+  border-bottom: 3px solid white;
+  transform: rotate(45deg) scale(0);
+  left: 8px;
+  top: 3px;
+  transition: 0.3s;
+}
+
+.robot-check input:checked + .custom-checkbox {
+  background: linear-gradient(135deg, #ff245c, #ff5a8a);
+  border-color: #ff245c;
+}
+
+.robot-check input:checked + .custom-checkbox::after {
+  transform: rotate(45deg) scale(1);
+}
+
+.text {
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* BOTÃO */
+.btn {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, #ff245c, #ff5a8a);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 25px rgba(255,36,92,0.45);
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+small {
+  display: block;
+  margin-top: 15px;
+  font-size: 12px;
+  color: #888;
+}
+
+    </style>
+
+<div class="card">
+
+  <!-- PRODUTO -->
+  <img class="produto-img" src="hs2twgf.png" alt="Produto">
+  <!-- <h3 class="produto-nome">Nome do Seu Produto</h3> -->
+
+  <h2>Verificação de Segurança</h2>
+  <p>Confirme para continuar para a oferta.</p>
+
+  <!-- CHECKBOX -->
+  <label class="robot-check">
+    <input type="checkbox" id="robot">
+    <span class="custom-checkbox"></span>
+    <span class="text">Não sou um robô</span>
+  </label>
+
+  <!-- BOTÃO -->
+  <button class="btn" id="btn" disabled onclick="verificar()">Verificar</button>
+
+  <small>Esta verificação ajuda a combater acessos automatizados.</small>
+
+</div>
+
+<script>
     
-    <!-- Carlos Silva -->
-    <article class="card review">
-      <div class="row" style="gap:12px">
-        <img class="avatar" src="Captura de tela 2026-01-12 222829.png" alt="Carla"/>
-        <div>
-          <b>Carla Silva</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-          <div style="color:#9ca3af;font-weight:700;font-size:12px">São Paulo, SP</div>
-        </div>
-      </div>
-      <p style="margin:8px 0 0 0;color:#374151">Minha esposa amou, presente pra  ela qualidade boa</p>
-      <div class="review-images">
-        <img class="review-image" src="de1.webp" alt="Feedback 1">
-      </div>
-    </article>
-    
-    <div class="space"></div>
-    
-    <!-- Beatriz Lima -->
-    <article class="card review">
-      <div class="row" style="gap:12px">
-        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-2-CPHO2E74.png" alt="Beatriz"/>
-        <div>
-          <b>Beatriz Lima</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
-          <div style="color:#9ca3af;font-weight:700;font-size:12px">Rio de Janeiro, RJ</div>
-        </div>
-      </div>
-      <p style="margin:8px 0 0 0;color:#374151">Valeu muito a pena, achei otimo o custo</p>
-      <div class="review-images">
-        <img class="review-image" src="dep2.webp" alt="Feedback 3">
-      </div>
-    </article>
+const check = document.getElementById('robot');
+const btn = document.getElementById('btn');
 
-    <div class="space"></div>
-    
-    <!-- Pedro Raúl -->
-    <article class="card review">
-      <div class="row" style="gap:12px">
-        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-3-DIYsgiJG.png" alt="Pedro"/>
-        <div>
-          <b>Pedro Raúl</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></span>
-          <div style="color:#9ca3af;font-weight:700;font-size:12px">Belo Horizonte, MG</div>
-        </div>
-      </div>
-      <p style="margin:8px 0 0 0;color:#374151">Comprei sabádo é chegou ontem não me arrependo, muito bom!</p>
-      <div class="review-images">
-         <img class="review-image" src="dep3.webp" alt="Feedback 9">
-      </div>
-    </article>
+check.addEventListener('change', () => {
+  btn.disabled = !check.checked;
+});
 
-    <div class="space"></div>
-    
-    <!-- Pietra Santos -->
-    <article class="card review">
-      <div class="row" style="gap:12px">
-        <img class="avatar" src="https://tktkshopp.shop/wp-content/uploads/2025/11/review-profile-new-4-CaSKJ7Oh.png" alt="Pietra"/>
-        <div>
-          <b>Pietra Santos</b> <span class="rating"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></span>
-          <div style="color:#9ca3af;font-weight:700;font-size:12px">Salvador, BA</div>
-        </div>
-      </div>
-      <p style="margin:8px 0 0 0;color:#374151">Muito boa, minha filha amou o a iluminaria que deu para casinha dela, entrega muito rápida tambem! Chegou em 3 dias… qualidade nota 1000 pena q só
-								posso colocar 5 estrelas rsrsrss</p>
-      <div class="review-images">
-        <img class="review-image" src="dep4.webp" alt="Feedback 9">
-      </div>
-    </article>
-  </section>
+function verificar() {
+  btn.innerText = "Verificando...";
+  btn.disabled = true;
 
-  <div class="divider"></div>
+  // Simula verificação de segurança
+  setTimeout(() => {
+      window.location.href = "index.html";
+  }, 1800);
+}
 
-  <!-- DESCRIÇÃO -->
-  <section class="container prose">
-    <div class="row" style="gap:10px;margin-bottom:8px;justify-content:space-between">
-      <div class="row" style="gap:10px">
-        <img src="Captura de tela 2025-12-09 225338.png" alt="" style="width:40px;height:40px;object-fit:contain"/>
-        <div>
-          <b>Luminária Solar com Câmera Integrada</b><br>
-          <small style="color:#9ca3af">1207 produtos</small>
-        </div>
-      </div>
-      <button class="follow-btn">Seguir</button>
-    </div>
-    <div class="card" style="padding:14px">
-      <h2>Descrição do produto</h2>
-      <h3>Controle a direção da câmera em 360° pelo celular. Veja cada detalhe da sua propriedade de qualquer lugar do mundo.</h3>
-
-
-       <h3>Com fácil instalação, a lâmpada se encaixa perfeitamente em soquetes E27, oferecendo iluminação brilhante e ajustável, além de ventilação suave para manter o ambiente agradável. Velocidade do vento ajustável, muda as cores da luz, muito prático para uso remoto.</h3>
-
-
-        <h3>  OBS: É NECESSÁRIO UTILIZAR O BOCAL QUE ACOMPANHA O PRODUTO PARA O FUNCIONAMENTO.</h3>
-        <h3>Especificações:</h3>
-        <h3>🧊 Áudio Bidirecional</h3>
-        <h3>📏 Autonomia de 24h</h3>
-        <h3>Há 8 anos no mercado de iluminação e segurança, a Soluz se destaca pelo compromisso com a qualidade e inovação. Nossa trajetória é marcada pela confiança de mais de 11.350 clientes satisfeitos em todo o Brasil, que escolheram nossas soluções para proteger o que mais importa. </h3>
-        <h3>Nossa equipe de especialistas está sempre pronta para oferecer um atendimento personalizado e humanizado, garantindo que cada cliente encontre a solução ideal para suas necessidades. Acreditamos que segurança e tecnologia devem ser acessíveis e fáceis de usar.</h3>
-         <h3>  Oferecemos garantia de 12 meses em todos os produtos e política de satisfação garantida: se não estiver completamente satisfeito, devolvemos seu dinheiro em até 7 dias após a compra.</h3>
-          <h3>Classificação Econômica: A (Certificado Inmetro) </h3>
-          <h3>O próprio lustre já é uma Luminária de Led </h3>
-          <h3>Características de Destaque das Luminárias Led </h3>
-          <h3>Design Moderno </h3>
-          <h3>Consumo de energia e eficiência </h3>
-          <h3>Exposição de produtos: A iluminação Led não emite radiação IV/UV, o que evita danos à pele, plantas e também objetos ou produtos expostos como roupas, calçados, móveis, decorações e obras de arte. </h3>
-          <h3>Lustre Redondo: É ideal para ambientes que necessitam boa iluminação, pois acompanha luminária plafon de Led 30W
-• Medidas Ventilador: </h3>
-
-           <h3>Luminária </h3>
-          <h3>Potência:  450W</h3>
-          <h3>Área de cobertura:   até 120m²</h3>
-          <h3>Temperatura de cor: 6000K (branco frio)</h3>
-          <h3>Ângulo de iluminação: 120°</h3>
-          <h3>Sensor de movimento:  Alcance de 8-12m</h3>
-          <h3>Modos de iluminação: 3 (baixo, médio, alto)</h3>
-
-          <h3>Câmera </h3>
-          <h3>Resolução:  2K (2304×1296p)</h3>
-           <h3>Sensor:  CMOS 1/2.7″</h3>
-          <h3>Ângulo de visão:  355° horizontal, 90° vertical</h3>
-           <h3>Visão noturna:  Colorida até 20m</h3>
-          <h3>Áudio: Bidirecional com cancelamento de ruído</h3>
-          <h3>Detecção: Movimento e pessoa/veículo</h3>
-          <h3>Compressão:  H.265/H.264</h3>
-
-                 <h3>Energia</h3>
-          <h3>Painel solar:  Monocristalino 5V/10W</h3>
-           <h3>Bateria:  26800mAh</h3>
-          <h3>Autonomia:  24h (totalmente carregada)</h3>
-           <h3>Tempo de carga: 6-8h (sol pleno)</h3>
-          <h3>Proteção: Sobrecarga e descarga profunda</h3>
-          
-            <h3>Conectividade</h3>
-          <h3>Wi-Fi:  2.4GHz (802.11 b/g/n)</h3>
-           <h3>Alcance Wi-Fi:  até 50m em área aberta</h3>
-          <h3>Armazenamento:  2Cartão MicroSD até 128GB</h3>
-           <h3>Controle remoto: Até 30m</h3>
-          <h3>App compatível: iOS 9.0+ / Android 5.0+</h3>
-          <h3>Proteção: IP66 (à prova d'água e poeira)</h3>
-          
-      
-         
-
-       
-
-
-
-       <h4>FABRICANTE: SHANTOU CHENGHAI QIZHI INTELLIGENT TECHNOLOGY CO.,</h4>
-
-      <p>ENVIO:   São Paulo</p>
-
-    
-    </div>
-  </section>
-
-  <!-- BOTÃO FIXO - CORRIGIDO PARA NÃO SAIR DA TELA -->
-  <nav class="dock">
-    <div class="dock-container">
-      <div class="dock-options">
-        <a href="#" class="dock-option">
-          <i class="fa-solid fa-store"></i>
-          <span>Loja</span>
-        </a>
-        <a href="#" class="dock-option">
-          <i class="fa-regular fa-comment"></i>
-          <span>Bater papo</span>
-        </a>
-        <a href="#reviews" class="dock-option active">
-          <i class="fa-regular fa-star"></i>
-          <span>Avaliações do produto</span>
-        </a>
-      </div>
-      <a id="comprar" classlass="btn btn-primary" href="https://pay.shopeletros.info/pay/aaa39068-4e74-438b-9397-cb9ba0235b7b">COMPRAR AGORA</a>
-    </div>
-  </nav>
-
-  <script>
-    // Contagem regressiva (50:55)
-    (function(){
-      const el=document.getElementById('timer');if(!el) return;const end=Date.now()+(50*60+55)*1000;function t(){const s=Math.max(0,Math.floor((end-Date.now())/1000));const m=String(Math.floor(s/60)).padStart(2,'0');const r=String(s%60).padStart(2,'0');el.textContent=m+':'+r;if(s>0) requestAnimationFrame(t)}t()})();
-
-    // Galeria: slider com as 5 imagens
-    const imgs=[
-      '0bfypft.jpeg',
-      'Captura de tela 2025-12-09 225412.png',
-      'Captura de tela 2025-12-09 225426.png',
-      'Captura de tela 2026-01-14 000744.png',
-      'Captura de tela 2025-12-09 225403.png',
-    ];
-    const hero=document.getElementById('hero');
-    const dots=document.querySelectorAll('.dot');
-    let i=0; 
-    
-    function set(n){
-      i=n;
-      hero.src=imgs[i];
-      dots.forEach((d,k)=>d.classList.toggle('active',k===i));
-    }
-    
-    // Trocar imagem ao clicar na galeria
-    document.getElementById('galeria').addEventListener('click',()=>set((i+1)%imgs.length));
-    
-    // Trocar imagem ao clicar nos dots
-    dots.forEach(dot => {
-      dot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        set(parseInt(e.target.getAttribute('data-index')));
-      });
-    });
-    
-    // Auto-slide a cada 5 segundos
-    setInterval(() => set((i+1)%imgs.length), 5000);
-  </script>
+</script>
 </body>
-
 </html>
-
-
-
-
-
-
-
+v
